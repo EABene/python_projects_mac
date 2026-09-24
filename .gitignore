@@ -1,7 +1,6 @@
-<<<<<<< HEAD
+.o
+a.out
 todos.json
-=======
 .env
 __pycache__/
->>>>>>> ca7c11f (Initial structure: Weather App)
 venv/
