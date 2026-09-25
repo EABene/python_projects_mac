@@ -1,4 +1,5 @@
-from layouts import create_board, print_current_board
+from layouts import create_board, print_current_board, print_board_help
+import sys
 
 WIN_LINES = [
     [(0, 0), (0, 2), (0, 4)], # rows
@@ -55,19 +56,25 @@ def board_full(board):
                 return False
     return True
 
-def player_turn(player, board):
+def player_turn(player, board): # in this function we take the input
     if player == 1:
-        prompt = "Player 1s turn (O) >> "
+        prompt = "Turn: Player 1 (O) >> "
     else:
-        prompt = "Player 2s turn (X) >> "
+        prompt = "Turn: Player 2 (X) >> "
 
     while True:
         print_current_board(board)
-        field = input(prompt)
-        if modify_board(field, player, board) == True:
+        field = input(prompt) # input exactly here
+        if field == "exit":
+            print("Careful! Program stopped!")
+            sys.exit()
+        elif field == "help":
+            print_board_help()
+            print("Please play your next move")
+        elif modify_board(field, player, board) == True:
             return
         else:
-            print("illegal move. Please try again:") 
+            print("Illegal move. Please try again:") 
 
 def tictactoe():
     board = create_board()
