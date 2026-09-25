@@ -40,13 +40,13 @@ def modify_board(field, player, board):
     if player == 2:
         symbol = "X"
     if field not in FIELD_TRANSLATOR:
-        return True
+        return False
     row, col = FIELD_TRANSLATOR[field]
     if board[row][col] != " ":
-        return True
+        return False
     else:
         board[row][col] = symbol
-        return False
+        return True
 
 def board_full(board):
     for line in board:
@@ -64,8 +64,10 @@ def player_turn(player, board):
     while True:
         print_current_board(board)
         field = input(prompt)
-        if modify_board(field, player, board) == False:
-            return 
+        if modify_board(field, player, board) == True:
+            return
+        else:
+            print("illegal move. Please try again:") 
 
 def tictactoe():
     board = create_board()
