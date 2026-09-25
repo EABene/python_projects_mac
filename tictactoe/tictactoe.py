@@ -11,6 +11,12 @@ WIN_LINES = [
     [(0, 4), (1, 2), (2, 0)]
 ]
 
+FIELD_TRANSLATOR = {
+    "1": (0, 0), "2": (0, 2), "3": (0, 4),
+    "4": (1, 0), "5": (1, 2), "6": (1, 4),
+    "7": (2, 0), "8": (2, 2), "9": (2, 4),
+    }
+
 def game_over_check(board):
     for line in WIN_LINES:
         fields = []
@@ -29,23 +35,18 @@ def game_over_check(board):
     return None
 
 def modify_board(field, player, board):
-    field_translator = {
-    "1": (0, 0), "2": (0, 2), "3": (0, 4),
-    "4": (1, 0), "5": (1, 2), "6": (1, 4),
-    "7": (2, 0), "8": (2, 2), "9": (2, 4),
-    }
     if player == 1:
         symbol = "O"
     if player == 2:
         symbol = "X"
-    if field not in field_translator:
-        return 1
-    row, col = field_translator[field]
+    if field not in FIELD_TRANSLATOR:
+        return True
+    row, col = FIELD_TRANSLATOR[field]
     if board[row][col] != " ":
-        return 1
+        return True
     else:
         board[row][col] = symbol
-        return 0
+        return False
 
 def board_full(board):
     for line in board:
@@ -63,7 +64,7 @@ def player_turn(player, board):
     while True:
         print_current_board(board)
         field = input(prompt)
-        if modify_board(field, player, board) == 0:
+        if modify_board(field, player, board) == False:
             return 
 
 def tictactoe():
