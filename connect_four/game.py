@@ -43,4 +43,4 @@ def play_one_game():
     # check if game is won or drawn
     # if not, other players turn
 
-print(h.COLUMNS["3"][0])
+
