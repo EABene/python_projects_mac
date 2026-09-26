@@ -1,1 +1,1 @@
-Collection of small programs for the purpose of learning and experimenting
+Collective of small programs for learning purposes.
