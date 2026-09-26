@@ -1,49 +1,38 @@
+ROWS = 6
+COLS = 7
 
+# "1" -> [(5, 0), (4, 0), ..., (0, 0)]  (bottom to top)
 COLUMNS = {
-    "1": [(5, 0), (4, 0), (3, 0), (2, 0), (1, 0), (0, 0)], 
-    "2": [(5, 1), (4, 1), (3, 1), (2, 1), (1, 1), (0, 1)],
-    "3": [(5, 2), (4, 2), (3, 2), (2, 2), (1, 2), (0, 2)],
-    "4": [(5, 3), (4, 3), (3, 3), (2, 3), (1, 3), (0, 3)],
-    "5": [(5, 4), (4, 4), (3, 4), (2, 4), (1, 4), (0, 4)],
-    "6": [(5, 5), (4, 5), (3, 5), (2, 5), (1, 5), (0, 5)],
-    "7": [(5, 6), (4, 6), (3, 6), (2, 6), (1, 6), (0, 6)]
+    str(col + 1): [(row, col) for row in range(ROWS - 1, -1, -1)]
+    for col in range(COLS)
 }
 
-VALID_COLUMNS = ["1", "2", "3", "4", "5", "6", "7"]
+VALID_COLUMNS = list(COLUMNS.keys())
 
-def show_empty_board():
-    print("| | | | | | | |\n" * 6, end = "")
-    print("|1|2|3|4|5|6|7|")
+SYMBOLS = {1: "O", 2: "X"}
+
 
 def create_empty_board():
-    board = [
-        [" ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " "]
-    ]
-    return board
+    return [[" "] * COLS for _ in range(ROWS)]
+
 
 def print_board(board):
+    print()
     for line in board:
-        for symbol in line:
-            print("|", end = "")
-            print(symbol, end = "")
-        print("|")
+        print("|" + "|".join(line) + "|")
+    print_helper_line()
+
 
 def print_helper_line():
-    print("|1|2|3|4|5|6|7|")
+    print("|" + "|".join(VALID_COLUMNS) + "|")
+
 
 def switch_player(current_player):
-    if current_player == 1:
-        current_player = 2
-    elif current_player == 2:
-        current_player = 1
+    return 2 if current_player == 1 else 1
+
 
 def welcome_message():
     print("Welcome to Connect Four!")
-    print("Player 1 will be \"0\"")
-    print("Player 1 will be \"X\"")
-
+    print(f'Player 1 will be "{SYMBOLS[1]}"')
+    print(f'Player 2 will be "{SYMBOLS[2]}"')
+    print('Type a column number (1-7) to drop a piece, or "exit".')

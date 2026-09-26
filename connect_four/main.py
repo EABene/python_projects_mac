@@ -3,7 +3,16 @@
 import game as g
 import helpers as h
 
-board = h.create_empty_board()
-h.print_board(board)
-h.print_helper_line()
 
+def main():
+    h.welcome_message()
+    while True:
+        g.play_one_game()
+        again = input("Play again? (y/n): ").strip().lower()
+        if again != "y":
+            print("Bye!")
+            break
+
+
+if __name__ == "__main__":
+    main()
