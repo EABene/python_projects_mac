@@ -13,14 +13,6 @@ COLUMNS = {
 
 VALID_COLUMNS = ["1", "2", "3", "4", "5", "6", "7"]
 
-def make_move(player):
-    pass
-
-def welcome_message():
-    print("Welcome to Connect Four!")
-    print("Player 1 will be \"0\"")
-    print("Player 1 will be \"X\"")
-
 def valid_move(move, board):
     if move not in VALID_COLUMNS:
         return False
@@ -29,8 +21,22 @@ def valid_move(move, board):
         return False
     return True
 
-def insert_in_board(move, board):
+def insert_in_board(move, board, symbol):
+    columns = COLUMNS[move]
+    i = 0
+    while board[columns[i]] != " ":
+        i += 1
+    board[columns[i]] = symbol
 
+def game_over_check(board, move):
+    curr_column = COLUMNS[move]
+    row, col = COLUMNS[move]
+    while board[row][col] != " ":
+        row -= 1
+    row += 1
+    curr_symbol = board[row][col]
+    counter = 1
+    
 
 def play_one_game():
     play_ongoing = True
@@ -40,16 +46,21 @@ def play_one_game():
     
     while play_ongoing:
         symbol = "0" if curr_player == 1 else "X" # ternary
-        while not valid_move(move):
+        while not valid_move(move, board):
             move = input(f"Player {curr_player} {symbol} move:")
             if move == "exit":
                 print("Game aborted")
                 break
-        insert_in_board(move, board)
+            if valid_move(move, board) == False:
+                print("Invalid move. Try again")
+                continue
+        insert_in_board(move, board, symbol)
+        game_over_check(board, move)
         h.switch_player(curr_player)
 
 
-    # write move into board if legal
+
     # check if game is won or drawn
     # if not, other players turn
 
+print(COLUMNS["3"][0])

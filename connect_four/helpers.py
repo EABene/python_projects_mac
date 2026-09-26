@@ -1,14 +1,4 @@
 
-COLUMNS = {
-    "1": [(5, 1), (4, 1), (3, 1), (2, 1), (1, 1), (0, 1)], 
-    "2": [(5, 3), (4, 3), (3, 3), (2, 3), (1, 3), (0, 3)],
-    "3": [(5, 5), (4, 5), (3, 5), (2, 5), (1, 5), (0, 5)],
-    "4": [(5, 7), (4, 7), (3, 7), (2, 7), (1, 7), (0, 7)],
-    "5": [(5, 9), (4, 9), (3, 9), (2, 9), (1, 9), (0, 9)],
-    "6": [(5, 11), (4, 11), (3, 11), (2, 11), (1, 11), (0, 11)],
-    "7": [(5, 13), (4, 13), (3, 13), (2, 13), (1, 13), (0, 13)],
-}
-
 def show_empty_board():
     print("| | | | | | | |\n" * 6, end = "")
     print("|1|2|3|4|5|6|7|")
@@ -30,3 +20,14 @@ def print_board(board):
         for symbol in line:
             print(symbol, end = "")
         print("")
+
+def switch_player(current_player):
+    if current_player == 1:
+        current_player = 2
+    elif current_player == 2:
+        current_player = 1
+
+def welcome_message():
+    print("Welcome to Connect Four!")
+    print("Player 1 will be \"0\"")
+    print("Player 1 will be \"X\"")
